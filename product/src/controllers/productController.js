@@ -82,7 +82,6 @@ class ProductController {
     }
   }
   
-
   async getOrderStatus(req, res, next) {
     const { orderId } = req.params;
     const order = this.ordersMap.get(orderId);
@@ -98,10 +97,10 @@ class ProductController {
       if (!token) {
         return res.status(401).json({ message: "Unauthorized" });
       }
-
+      
       const { id } = req.params;
-      const product = await Product.findById(id); 
-      if(!product){
+      const product = await Product.findById(id);
+      if (!product){
         return res.status(404).json({ message: "product not found"})
       }
       

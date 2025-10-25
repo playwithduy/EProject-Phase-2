@@ -1,0 +1,95 @@
+# ==============================
+# 📦 Node.js dependencies
+# ==============================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+pnpm-lock.yaml
+
+# ==============================
+# 🧱 Build & output directories
+# ==============================
+dist/
+build/
+coverage/
+.tmp/
+.cache/
+.out/
+
+# ==============================
+# 🔐 Environment files
+# ==============================
+.env
+*.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# ==============================
+# 🐳 Docker files & volumes
+# ==============================
+docker-data/
+.docker/
+*.pid
+*.seed
+*.log
+Dockerfile.old
+Dockerfile.backup
+
+# ==============================
+# ⚙️ OS generated files
+# ==============================
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+desktop.ini
+
+# ==============================
+# 🧩 IDE / Editor files
+# ==============================
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+*.bak
+*.tmp
+
+# ==============================
+# 🧰 Logs & temp
+# ==============================
+logs/
+*.log
+*.out
+*.err
+nohup.out
+
+# ==============================
+# 🧪 Test reports
+# ==============================
+coverage/
+test-results/
+jest-html-reporters-*.html
+.nyc_output/
+
+# ==============================
+# 🚀 GitHub Actions temporary
+# ==============================
+.github/workflows/*.log
+.github/workflows/*.tmp
+
+# ==============================
+# 🧱 Project-specific
+# ==============================
+# Ignore env files inside each microservice
+api-gateway/.env
+auth/.env
+order/.env
+product/.env
+
+# Ignore Docker Compose override files
+docker-compose.override.yml

@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:6.0
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - app-network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"      # Cổng AMQP để các service kết nối
+      - "15672:15672"    # Giao diện web quản lý RabbitMQ
+    networks:
+      - app-network
+
+  auth:
+    build: ./auth
+    container_name: auth
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./auth/.env
+    depends_on:
+      - mongo
+    networks:
+      - app-network
+
+  product:
+    build: ./product
+    container_name: product
+    ports:
+      - "3001:3001"
+    env_file:
+      - ./product/.env
+    depends_on:
+      - mongo
+      - auth
+      - rabbitmq
+    networks:
+      - app-network
+
+  order:
+    build: ./order
+    container_name: order
+    ports:
+      - "3002:3002"
+    env_file:
+      - ./order/.env
+    depends_on:
+      - mongo
+      - auth
+      - product
+      - rabbitmq
+    networks:
+      - app-network
+
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - "3003:3003"
+    depends_on:
+      - auth
+      - product
+      - order
+    networks:
+      - app-network
+
+volumes:
+  mongo-data:
+
+networks:
+  app-network:
+    driver: bridge
